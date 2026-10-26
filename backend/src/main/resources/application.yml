@@ -1,0 +1,35 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/spotify}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:db/post-schema.sql
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+  servlet:
+    multipart:
+      max-file-size: 25MB
+      max-request-size: 30MB
+
+app:
+  jwt-secret: ${JWT_SECRET:}
+  jwt-expiration-ms: 86400000
+  cors-origin: ${CORS_ORIGIN:http://localhost:5173}
+  storage-dir: ${STORAGE_DIR:./storage}
+  max-audio-bytes: 25000000
+  max-image-bytes: 5000000
+  admin-email: ${ADMIN_EMAIL:admin@example.com}
+  admin-password: ${ADMIN_PASSWORD:}
+  seed-demo: ${SEED_DEMO:false}
+  youtube-api-key: ${YOUTUBE_API_KEY:}
+  youtube-api-base: https://www.googleapis.com/youtube/v3
+  youtube-cache-seconds: 300
